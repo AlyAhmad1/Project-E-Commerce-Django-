@@ -1,0 +1,240 @@
+{% extends 'shopping/base.html' %}
+{% block content %}
+
+
+<style>
+  /* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  width: 300px;
+  left:450px;
+  bottom:20px;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 15px 50px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=number] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  margin-bottom:10px;
+  opacity: 0.8;
+  border-radius: 25px;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div style="margin-top:40px;" class="row">
+
+        <!-- Post Content Column -->
+        <div  class="col-lg-8">
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="{{All.0.Picture.url}}" alt="">
+
+            <hr>
+
+
+            <!-- Title -->
+            <h1 class="mt-4">{{ All.0.title }}</h1>
+            <p class="lead" style="margin:0">Details</p>
+            <blockquote style="margin-top:0px;" class="blockquote">
+                <p class="mb-0">{{All.0.Description}}</p>
+                <footer class="blockquote-footer">Price
+                    <cite title="Source Title">$ {{All.0.Price}}</cite>
+                </footer>
+            </blockquote>
+            <hr>
+
+            <!-- Author -->
+
+            <p class="lead">
+                Posted On {{All.0.Time}}
+                <a href="#"> By Ali.COM</a>
+            </p>
+
+            <hr>
+
+            <!-- Date/Time -->
+            <p ></p>
+            <hr>
+
+            <!-- Post Content -->
+
+
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body" >
+                    <form method="POST" action="{% url 'add_comment' All.0.title %}" enctype='multipart/form-data'>
+                        <div class="form-group">
+                            {% csrf_token %}
+                            <textarea name="com" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Comment with nested comments -->
+            <div class="media mb-4">
+<!--                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">-->
+
+                <div class="media-body">
+                    {% for i in comments %}
+                    <h5 class="mt-0">Commenter Name</h5>
+                    <h2><small> {{i.comment}}</small> </h2>
+                    <a href="{% url 'delete_comment' pk=i.comment t=All.0.title %}">Delete</a>
+
+
+<br/>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Categories</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML</a>
+                                </li>
+                                <li>
+                                    <a href="#">Freebies</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">JavaScript</a>
+                                </li>
+                                <li>
+                                    <a href="#">CSS</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tutorials</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Order Now</h5>
+                <button style="margin:5px;" onclick="openForm()"  type="button" class="btn btn-success float-right">Add To Cart</button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+
+
+
+<!--Add New Item only Admin-->
+<div class="form-popup" id="myForm">
+    <form method="POST" action="{% url 'Adding_cart' %}" style="background-color:F4ED7B;" enctype='multipart/form-data' class="form-container">
+        <h1>Add Item</h1>
+        {% csrf_token %}
+        <label>Product:</label>
+        <input type="text" name="title"  value="{{All.0.title}}" readonly>
+        <label>Price:</label>
+        <input type="number" name="Price" value="{{All.0.Price}}" readonly>
+        <label>Quantity</label>
+        <input type="number" name="Quantity" placeholder="Quantity" >
+
+        <button style="margin-top:10px;" type="submit" class="btn">Add </button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
+</div>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">ALI.COM</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'Shopping/base.html' %}
+{% block content %}
+
+<style>
+body {
+  background: #eecda3;
+  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+  background: linear-gradient(to right, #eecda3, #ef629f);
+  min-height: 100vh;
+}
+    </style>
+
+<!-- For demo purpose -->
+<div class="container text-Black py-5 text-center" style="margin-top:60px;">
+    <h1 class="display-4">Bills</h1>
+    <p class="lead mb-0">We Provide Your Desires</p>
+</div>
+
+
+
+<table class="table table-dark table-bordered" style="margin-left:390px;width:400px;border:white dashed 2px;">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Bill Number</th>
+        <th scope="col">Payment</th>
+        <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in All %}
+    <tr href="#">
+        <td>{{forloop.counter}}</td>
+        <td>{{i.Receiver}}</td>
+        <td>{{i.Bill_number}}</td>
+        <td>{{i.Amount}}</td>
+        <td><a href="{% url 'bill_detail' bill_number=i.Bill_number %}">{{i.Date}}</a></td>
+    </tr>
+    {% endfor %}
+
+     </tbody>
+</table>
+
+
+
+{% endblock %}

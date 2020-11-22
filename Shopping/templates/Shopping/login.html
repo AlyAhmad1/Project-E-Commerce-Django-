@@ -1,0 +1,36 @@
+{% extends 'Shopping/base.html' %}
+
+{% block content %}
+{% if messages %}
+{% for i in messages %}
+
+<h5 style="margin-top:50px;text-align:center;background-color:Red;width:100%">{{i}}</h5>
+
+{% endfor %}
+{% endif %}
+
+<div style="border:2px solid GREY;box-shadow:2px 2px 4px #000000;border-radius:10px; padding:5px;margin-left:390px;margin-top:100px;width:30%;" class="text-center" data-new-gr-c-s-check-loaded="14.983.0">
+ {% if signup %}
+    <form class="form-signin" action="{% url 'Submit' %}" method="POST">
+    <h1 class="h3 mb-3 font-weight-normal">Sign-Up</h1>
+    {% csrf_token %}
+    {{ form.Email }}
+    {{ form.Password }}
+    <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">Sign-Up</button>
+    <p class="mt-5 mb-3 text-muted">Powered By Ali Ahmad</p>
+    </form>
+
+ {% else %}
+    <form class="form-signin" action="{% url 'check' %}" method="POST">
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    {% csrf_token %}
+    {{ form.Email }}
+    {{ form.Password }}
+    <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">login</button>
+    <p class="mt-5 mb-3 text-muted">Powered By Ali Ahmad</p>
+    </form>
+        {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'Shopping/base.html' %}
+{% block content %}
+
+<style>
+body {
+  background: #eecda3;
+  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+  background: linear-gradient(to right, #eecda3, #ef629f);
+  min-height: 100vh;
+}
+
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td {
+  padding:5px;
+  height: 20px;
+  vertical-align: bottom;
+}
+
+   </style>
+
+    <h1 style="margin-top:60px;margin-left:500px;">Ali.com</h1>
+    <h4 style="margin-left:460px;" >We Provide Your Desires</h4>
+    <h4 style="margin-left:280px" >Bill Number: {{All.0.Bill_number}}</h4>
+    <h4 style="margin-left:280px" >Customer: {{All.0.Receiver}}</h4>
+
+    <div style="margin-left:280px;width:700px;">
+        <table STYLE="text-align:center;">
+            <thead>
+            <tr>
+                <th style="text-align:center;" scope="col">#</th>
+                <th style="text-align:center;" scope="col">Item Name</th>
+                <th style="text-align:center;" scope="col">Qty</th>
+                <th style="text-align:center;" scope="col">Price</th>
+                <th style="text-align:center;" scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in All_items %}
+            <tr>
+
+                <td>{{forloop.counter}}</td>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+                <td>{{i.3}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <h3 style="margin:10px 0px 0px 280px;">Shipment:100</h3>
+    <h3 style="margin:0px 0px 0px 280px;">Total Items= {{All_items|length}}</h3>
+    <h3 style="margin:0px 0px 0px 280px;">Grand-Total = {{All.0.Amount}}</h3>
+    <h4 style="margin-left:430px;" >............Thanks For Shopping............</h4>
+
+{% endblock %}
