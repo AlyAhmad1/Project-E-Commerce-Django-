@@ -91,7 +91,9 @@
             <blockquote style="margin-top:0px;" class="blockquote">
                 <p class="mb-0">{{All.0.Description}}</p>
                 <footer class="blockquote-footer">Price
-                    <cite title="Source Title">$ {{All.0.Price}}</cite>
+                    <cite title="Source Title">$ {{All1.0.Sell_rate}}</cite>
+                    <br/>
+                    Items_available:{{All1.0.Available}}
                 </footer>
             </blockquote>
             <hr>
@@ -207,7 +209,7 @@
         <label>Product:</label>
         <input type="text" name="title"  value="{{All.0.title}}" readonly>
         <label>Price:</label>
-        <input type="number" name="Price" value="{{All.0.Price}}" readonly>
+        <input type="number" name="Price" value="{{All1.0.Sell_rate}}" readonly>
         <label>Quantity</label>
         <input type="number" name="Quantity" placeholder="Quantity" >
 

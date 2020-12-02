@@ -17,6 +17,6 @@ class All_Bill(models.Model):
     CVV = models.IntegerField(null=True)                     # CVV Stands for Cad Verification Value
     Payment = models.CharField(max_length=30, null=True)       # On Delivery / Or By Card
     All_fields = models.BinaryField(max_length=1000,  null=True)  # This is For Storing Items Data Prices/ Pickled Object
-    Amount = models.IntegerField( null=True)                    # Total Bill
+    Amount = models.FloatField( null=True)                    # Total Bill
     Date = models.DateField(null=True)
     Bill_number = models.TextField(null=True)

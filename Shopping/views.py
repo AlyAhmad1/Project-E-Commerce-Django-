@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import FormA, FormB
-from .models import Logs, Item, Comment, Cart
+from .models import Logs, Item, Comment, Cart, Stock
 from django.contrib import messages
 from datetime import datetime
 from django.views.decorators.http import require_POST
@@ -25,21 +25,27 @@ class VIEWS:
         if All.is_valid():
             messages.error(request,'ITEM ADDED SUCCESSFULLY')
             data= Item(title=request.POST['title'],Description=request.POST['Description'],Price=request.POST['Price'],
-                       Picture=request.FILES['Image'], Time = datetime.now())
+                       Picture=request.FILES['Image'], Time = datetime.now(), Quantity = request.POST['Quantity'])
             Item.save(data)
+            Sell_Price = (int(request.POST['Price']) * 0.1) + int(request.POST['Price'])
+            S = Stock(title= request.POST['title'], Buy_rate= request.POST['Price'],
+                      Sell_rate=Sell_Price, Quantity= request.POST['Quantity'],Available=request.POST['Quantity'])
+            Stock.save(S)
             return redirect('HOME')
         messages.error(request,'Error in Adding Item try Again ')
         return redirect('HOME')
 
-    def delete_item(self, request, pk):
+    def del_item(self, request, pk):
         Item.objects.filter(title=pk).delete()
+        Stock.objects.filter(title=pk).delete()
         return redirect('HOME')
 
     def details(self,request,pk):
         All = Item.objects.filter(title=pk)
+        All1 = Stock.objects.filter(title=pk)
         comments = Comment.objects.filter(title=pk)
         form = FormB()
-        Data = {'All':All, 'comments':comments,'form':form}
+        Data = {'All':All, 'comments':comments,'form':form,'All1':All1}
         return render(request,'Shopping/Details.html',Data)
 
     def comment(self, request, pk):
@@ -125,3 +131,11 @@ class Log:
         messages.error(request,'You are Logged Out')
         return redirect('HOME')
 
+
+class StockManage:
+    available = 0
+    sell = 0
+    def stock(self, request):
+        All = Stock.objects.all()
+        Data = {"All":All}
+        return render(request,'Shopping/stock.html', Data)

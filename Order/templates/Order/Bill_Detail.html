@@ -30,6 +30,7 @@ td {
     <h4 style="margin-left:460px;" >We Provide Your Desires</h4>
     <h4 style="margin-left:280px" >Bill Number: {{All.0.Bill_number}}</h4>
     <h4 style="margin-left:280px" >Customer: {{All.0.Receiver}}</h4>
+    <h4 style="margin-left:280px" >Address: {{All.0.Address}}</h4>
 
     <div style="margin-left:280px;width:700px;">
         <table STYLE="text-align:center;">
@@ -45,11 +46,10 @@ td {
             <tbody>
             {% for i in All_items %}
             <tr>
-
                 <td>{{forloop.counter}}</td>
                 <td>{{i.0}}</td>
-                <td>{{i.1}}</td>
                 <td>{{i.2}}</td>
+                <td>{{i.1}}</td>
                 <td>{{i.3}}</td>
             </tr>
             {% endfor %}
@@ -62,5 +62,4 @@ td {
     <h3 style="margin:0px 0px 0px 280px;">Total Items= {{All_items|length}}</h3>
     <h3 style="margin:0px 0px 0px 280px;">Grand-Total = {{All.0.Amount}}</h3>
     <h4 style="margin-left:430px;" >............Thanks For Shopping............</h4>
-
 {% endblock %}

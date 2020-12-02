@@ -1,0 +1,52 @@
+{% extends 'Shopping/base.html' %}
+{% block content %}
+
+<style>
+body {
+  background: #eecda3;
+  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+  background: linear-gradient(to right, #eecda3, #ef629f);
+  min-height: 100vh;
+}
+
+
+    </style>
+
+<div class="px-4 px-lg-0" >
+    <!-- For demo purpose -->
+    <div class="container text-white py-5 text-center" style="margin-top:60px;">
+        <h1 class="display-4">Stock</h1>
+        <p class="lead mb-0">We Provide Your Desires</p>
+    </div>
+    <!-- End -->
+
+</div>
+    <table style="text-align:center;margin-left:20px; width:90%;" class="table table-bordered">
+        <thead class="thead-dark">
+        <tr >
+            <th style="text-align:center;" scope="col">#</th>
+            <th style="text-align:center;" scope="col">Name</th>
+            <th style="text-align:center;" scope="col" >Total_Quantity</th>
+            <th style="text-align:center;" scope="col" >Available_Quantity</th>
+            <th style="text-align:center;" scope="col">Sell_Quantity</th>
+            <th style="text-align:center;" scope="col">Buy_Rate</th>
+            <th style="text-align:center;" scope="col">Sell_Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in All %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.Quantity}}</td>
+            <td>{{i.Available}}</td>
+            <td>{{i.Sell}}</td>
+            <td>{{i.Buy_rate}}</td>
+            <td>{{i.Sell_rate}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,10 +1,10 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
-from Shopping.models import Cart
+from Shopping.models import Cart, Item,Stock
 from .models import All_Bill
 from django.contrib import messages
 import _pickle as pickle
 import datetime
-
 
 
 # Create your views here.
@@ -54,6 +54,13 @@ class Order:
                 except:
                     P = False
                 B_L = All_Bill.objects.filter(User=user)
+                try:
+                    Bill.Quantity_clear(Items)
+                except Exception as e:
+                    message = f'Sorry Selected Quantity of {e} is not Available Update it in Cart'
+                    messages.error(request,message)
+                    return redirect('cart')
+
                 if P:
                     Pay = 'On Delivery'
                     D = All_Bill(User=user,Receiver=request.POST['Name'],Address=request.POST['Address'],City=request.POST['City'],
@@ -90,3 +97,21 @@ class Bill:
             All_items=pickle.loads(All[0].All_fields)
             Data = {'All':All,'All_items':All_items}
             return render(request,'Order/Bill_Detail.html',Data)
+
+    @classmethod
+    def Quantity_clear(cls,items):
+        All = pickle.loads(items)
+        for i in All:
+            title = i[0]
+            Purchase_Quantity = i[2]
+            Item_data=Stock.objects.get(title=title)
+            Available = Item_data.Available
+            if Available < Purchase_Quantity:
+                raise Exception(title)
+            Available = Available - Purchase_Quantity
+            Sell = int(Item_data.Sell) + Purchase_Quantity
+            Item_data.Available = Available
+            Item_data.Sell = Sell
+            Item_data.save()
+
+

@@ -13,6 +13,16 @@ body {
 
     </style>
 
+{% if messages %}
+{% for i in messages %}
+
+<h5 style="margin-top:50px;text-align:center;background-color:Red;width:100%">{{i}}</h5>
+
+{% endfor %}
+{% endif %}
+
+
+
 <div class="px-4 px-lg-0" >
     <!-- For demo purpose -->
     <div class="container text-white py-5 text-center" style="margin-top:60px;">
@@ -27,8 +37,8 @@ body {
                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
                     <!-- Shopping cart table -->
-                    <div class="table-responsive">
-                        <table class="table">
+                    <div >
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col" class="border-0 bg-light">
@@ -53,12 +63,8 @@ body {
                             <tr>
                                 <th scope="row" class="border-0">
                                     <div class="p-2">
-<!--                                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-1_zrifhn.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">-->
-<!--                                        <div class="ml-3 d-inline-block align-middle">-->
-                                            <h4 class="mb-0"> <a href="{% url 'Details' i.title %}" class="text-dark d-inline-block align-middle">{{i.title}}</a></h4>
-<!--                                        <span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>-->
-<!--                                        </div>-->
-                                    </div>
+                                           <h4 class="mb-0"> <a href="{% url 'Details' i.title %}" class="text-dark d-inline-block align-middle">{{i.title}}</a></h4>
+                                   </div>
                                 </th>
                                 <td class="border-0 align-middle"><strong>{{i.Price}}</strong></td>
                                 <td class="border-0 align-middle"><strong>{{i.Quantity}}</strong></td>

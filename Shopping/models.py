@@ -14,6 +14,7 @@ class Item(models.Model):
     Price = models.FloatField()
     Time = models.DateTimeField(null=True)
     Picture = models.ImageField(upload_to='Shopping/static', default='')
+    Quantity = models.IntegerField(null=True)
 
 
 class Comment(models.Model):
@@ -28,3 +29,11 @@ class Cart(models.Model):
     Price = models.FloatField()
     Total = models.FloatField()
 
+
+class Stock(models.Model):
+    title = models.CharField(max_length=50, primary_key=True)
+    Buy_rate = models.FloatField()
+    Sell_rate = models.FloatField()
+    Quantity = models.IntegerField()
+    Available = models.IntegerField(default=0)
+    Sell = models.IntegerField(default=0)

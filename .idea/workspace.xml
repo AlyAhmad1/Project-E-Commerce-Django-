@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="655c1f4f-da58-4310-8db5-7b88403b87f3" name="Default Changelist" comment="" />
+    <list default="true" id="655c1f4f-da58-4310-8db5-7b88403b87f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/templates/Order/Bill_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/Bill_Detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/templates/Order/Cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/Cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/Details.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +31,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\Django\Django Projects\Ecommerce\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1kC0MddBEoYYSeeob2h3iSDdRcp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -24,6 +51,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SvnConfiguration">
@@ -40,17 +68,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="94" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606734915177">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="94" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.760@0.0.1280.760" timestamp="1606734915177" />
+    <state x="294" y="0" key="CommitChangelistDialog2" timestamp="1606243972411">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="294" y="0" key="CommitChangelistDialog2/0.0.1280.760@0.0.1280.760" timestamp="1606243972411" />
     <state x="141" y="22" key="SettingsEditor" timestamp="1605190562316">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="141" y="22" key="SettingsEditor/0.0.1280.760@0.0.1280.760" timestamp="1605190562316" />
-    <state x="335" y="204" key="com.intellij.ide.util.TipDialog" timestamp="1605895750928">
+    <state x="335" y="204" key="com.intellij.ide.util.TipDialog" timestamp="1606896943551">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="335" y="204" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1605895750928" />
-    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1605781624195">
+    <state x="335" y="204" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1606896943551" />
+    <state x="449" y="297" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606646193674">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup/0.0.1280.760@0.0.1280.760" timestamp="1605781624195" />
+    <state x="449" y="297" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.760@0.0.1280.760" timestamp="1606646193674" />
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1606646659201">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup/0.0.1280.760@0.0.1280.760" timestamp="1606646659201" />
   </component>
 </project>

@@ -3,6 +3,7 @@ from .views import Order, Bill
 O = Order()
 B = Bill()
 
+
 urlpatterns = [
     path('', O.make_order, name='cart'),
     path('delete_item/<pk>', O.delete_item, name='delete_item'),
