@@ -1,6 +1,4 @@
 from django.db import models
-from datetime import datetime
-# Create your models here.
 
 
 class Logs(models.Model):
@@ -18,8 +16,9 @@ class Item(models.Model):
 
 
 class Comment(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50) # the post on which user commenting
     comment = models.CharField(max_length=500)
+    commenter = models.CharField(max_length=500, null=True)    # user name who is commenting
 
 
 class Cart(models.Model):

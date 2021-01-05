@@ -1,0 +1,49 @@
+{% extends 'Shopping/Admin_base.html' %}
+{% block content %}
+
+<style>
+body {
+  background: #eecfa3;
+  background: -webkit-linear-gradient(to right, #eecfa3, #ef629f);
+  background: linear-gradient(to right, #eecda9, #ef629f);
+}
+
+
+    </style>
+
+<div class="px-4 px-lg-0" >
+    <!-- For demo purpose -->
+    <div class="container text-white py-5 text-center" style="margin-top:60px;">
+        <h1 class="display-4">Shipped Orders</h1>
+        <p class="lead mb-0">We Provide Your Desires</p>
+    </div>
+    <!-- End -->
+
+</div>
+<table style="text-align:center;margin-left:20px; width:90%;" class="table table-bordered">
+    <thead class="thead-dark">
+    <tr >
+        <th style="text-align:center;" scope="col">#</th>
+        <th style="text-align:center;" scope="col" >Receiver</th>
+        <th style="text-align:center;" scope="col">Amount</th>
+        <th style="text-align:center;" scope="col">Order Date</th>
+        <th style="text-align:center;" scope="col">Shipped Date</th>
+        <th style="text-align:center;" scope="col">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in All_items %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.Receiver_Name}}</td>
+        <td>{{i.Amount}}</td>
+        <td>{{i.Date}}</td>
+        <td>{{i.Shipped_Date}}</td>
+        <td><a href="{% url 'OrderDetail' user=i.Receiver_Name bill=i.Bill_number %}">Go</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

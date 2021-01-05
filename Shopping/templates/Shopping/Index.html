@@ -1,88 +1,23 @@
+{%  extends 'Shopping/base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block content %}
+{% block left_panel %}
+{% endblock %}
+{% block right_panel %}
+{% endblock %}
 
 
-    <!-- Bootstrap CSS -->
-    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
-
-    <title>ALI.COM</title>
-    <style>
-  /* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  width: 300px;
-  left:450px;
-  bottom:20px;
-
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 15px 50px;
-}
-
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 12px;
-  margin: 3px 0 15px 0;
-  border: none;
-  background: #f1f1f1;
-  border-radius: 15px;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-  border-radius: 25px;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-
-}
+<style>
     #navbar{
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
   width: 100%;
-  height: 50px;
-  background-color: #00a087;
+  height: 3%;
 }
 
 </style>
-
-
-</head>
-<body>
 
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,119 +26,82 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="{% url 'HOME' %}">Home</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'signup' %}">Sign-Up</a>
-            </li>
+            {% if User %}
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'cart' %}">Cart</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'bill' %}">Bills</a>
             </li>
-
-            {% if User  and se == 'admin' %}
-
             <li class="nav-item active">
-                <a class="nav-link " href="{% url 'stock' %}" >Stock</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
             </li>
-            <li>
-                {% endif %}
-                <!--<div class="main">-->
-                {% if User %}
-                <!-- Example single danger button -->
-                <div  class="btn-group" style="margin-top:5px;margin-left:650px;">
-                    <button type="button" class="btn btn-danger dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{se}}
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
-
-                        {% if se == 'admin' %}
-                        <a  onclick="openForm()"  class="dropdown-item" >Add Item</a>
-                        {% endif %}
-                    </div>
-                </div>
-
-                {% endif %}
-
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
-
+            {% endif %}
         </ul>
     </div>
+    <form method="get">
+        {{filter.form}}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
 </nav>
 
 
-{% if messages %}
-{% for i in messages %}
 
-<h5 style="margin-top:50px;text-align:center;background-color:Red;width:100%">{{i}}</h5>
 
-{% endfor %}
-{% endif %}
-<div style="margin-top:70px">
-    <div class="container" style="margin-top:5px;">
-    <div class="row">
+<div style="margin-top:52px;">
+    {% if messages %}
+    {% for i in messages %}
+    <h5 style="text-align:center;background-color:Red;width:100%">{{i}}</h5>
+    {% endfor %}
+    {% endif %}
+    <div class="container" style=";:margin-top:5px;">
+    <div class="row" style="width:1000px;height:350px;margin-bottom:550px;">
         {% for i in All_items %}
-        <div class="col-md-4">
+        <div class="col-md-3" style="float:none;position:static;">
            <div class="card mb-4 shadow-sm">
                 <img src="{{i.Picture.url}}" width="auto" height="200px">
-                <div class="card-body">
-                    <h5>{{i.title}}</h5>
-                    <a href="{% url 'Details' i.title %}">    <p class="card-text">{{i.Description|slice:":20" }}.....</p></a>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button class="btn btn-sm btn-outline-secondary">${{i.Price}}</button>
-
-                            {% if se == 'admin' %}
-
-                            <a href="{% url 'del_item' i.title %}" class="btn btn-sm btn-outline-secondary">Delete</a>
-                            {% endif %}
-                        </div>
-                        <small class="text-muted">{{i.Time}}</small>
-                    </div>
+                <div class="card-body" style="padding:0px;padding-left:2px;">
+                    <a href="{% url 'Details' i.title %}"> <h3 style="margin:0px;">{{i.title}}</h3></a>
+                    <small class="text-muted">Price:    ${{i.Price}}</small>
+                    <br/>
                 </div>
             </div>
         </div>
         {% endfor %}
+
+    </div>
+
     </div>
 </div>
 
-    <!--Add New Item only Admin-->
-    <div class="form-popup" id="myForm">
-        <form method="POST" action="{% url 'add_item' %}" style="text-shadow: 2px 2px;background-color:#ff6666;color:black;" enctype='multipart/form-data' class="form-container">
-            <h1 style="color:black;">Add Item</h1>
-            {% csrf_token %}
-            {{form.title}}
-            {{form.Description}}
-            {{form.Quantity}}
-            {{form.Price}}
-            {{form.Image}}
-            <button style="margin-top:10px;" type="submit" class="btn">Add</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-        </form>
-    </div>
+<nav style="position:static;margin-top:120px;margin-left:500px;" aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if All_items.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{All_items.previous_page_number}}">Previous</a></li>
+        {% endif %}
+        {% for i in All_items.paginator.page_range %}
+        {% if Data.number == i %}
+        <strong style="font-size:30px;">{{i}}</strong>
+        {% elif i > All_items.number|add:'-2' and i < All_items.number|add:'2' %}
+        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+        {% endif %}
+        {% endfor %}
 
-</div>
+        {% if All_items.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{All_items.next_page_number}}">Next</a></li>
+        {% endif %}
 
-<!--</div>-->
-<script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
+    </ul>
+</nav>
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+{% endblock %}

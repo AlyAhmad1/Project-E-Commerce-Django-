@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Shopping',
     'Order',
+    'django_filters'
 ]
 
 MIDDLEWARE = [

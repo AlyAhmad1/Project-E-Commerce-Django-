@@ -2,22 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="655c1f4f-da58-4310-8db5-7b88403b87f3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Order/migrations/0017_pendingorder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Order/migrations/0018_pendingorder_bill_number.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Order/migrations/0019_dispatched.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Order/migrations/0020_dispatched_shipped_date.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Order/migrations/0021_auto_20210102_0019.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/filte.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/migrations/0048_comment_commenter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Admin_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Admin_dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/orders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/shipped.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/AWAD.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/B1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/FYP.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/Farhan_icon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/Farhan_icon2.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/Python.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/Untitled-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/logo-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/logo1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/slide-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/Shopping/static/yt_icon_rgb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Ecommerce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ecommerce.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECM/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ECM/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order/templates/Order/Bill_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/Bill_Detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order/templates/Order/Cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/Cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/templates/Order/Checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/Checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/templates/Order/bill.html" beforeDir="false" afterPath="$PROJECT_DIR$/Order/templates/Order/bill.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Order/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shopping/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shopping/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shopping/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/Details.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/Index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shopping/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shopping/templates/Shopping/stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/templates/Shopping/stock.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shopping/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shopping/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/10-103464_broken-screen-wallpaper-broken-screen-prank-iphone..jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/3673382_GFL8b6d.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/Shopping/static/3673382.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/3d-wood-logo-mockup.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/ABC.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/ABC_EQJoC95.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/B1-compressed.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/bannefrinal_3yGrbyB.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/bannefrinal_IP07sPp.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/bannefrinal_WA7Bp7E.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/bannefrinal_byhjTNj.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/bannefrinal_o1PSsPo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Shopping/static/login.PNG" beforeDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,8 +66,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -52,7 +92,20 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Burhan_Bhai" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -67,6 +120,19 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="94" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606734915177">
       <screen x="0" y="0" width="1280" height="760" />
@@ -76,21 +142,25 @@
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="294" y="0" key="CommitChangelistDialog2/0.0.1280.760@0.0.1280.760" timestamp="1606243972411" />
-    <state x="141" y="22" key="SettingsEditor" timestamp="1605190562316">
+    <state x="420" y="135" key="FileChooserDialogImpl" timestamp="1607625620966">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="141" y="22" key="SettingsEditor/0.0.1280.760@0.0.1280.760" timestamp="1605190562316" />
-    <state x="335" y="204" key="com.intellij.ide.util.TipDialog" timestamp="1606896943551">
+    <state x="420" y="135" key="FileChooserDialogImpl/0.0.1280.760@0.0.1280.760" timestamp="1607625620966" />
+    <state x="141" y="22" key="SettingsEditor" timestamp="1607525909829">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="335" y="204" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1606896943551" />
+    <state x="141" y="22" key="SettingsEditor/0.0.1280.760@0.0.1280.760" timestamp="1607525909829" />
+    <state x="335" y="204" key="com.intellij.ide.util.TipDialog" timestamp="1607604647818">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="335" y="204" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1607604647818" />
     <state x="449" y="297" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606646193674">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
     <state x="449" y="297" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.760@0.0.1280.760" timestamp="1606646193674" />
-    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1606646659201">
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1606919450926">
       <screen x="0" y="0" width="1280" height="760" />
     </state>
-    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup/0.0.1280.760@0.0.1280.760" timestamp="1606646659201" />
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup/0.0.1280.760@0.0.1280.760" timestamp="1606919450926" />
   </component>
 </project>

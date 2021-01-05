@@ -1,45 +1,46 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from Shopping.models import Cart, Item,Stock
-from .models import All_Bill
+from .models import All_Bill, PendingOrder, Dispatched
 from django.contrib import messages
 import _pickle as pickle
 import datetime
+from Shopping import login_required
+from Shopping.forms import FormB
+from django.core.paginator import Paginator
+from Shopping.filte import ABC
 
 
 # Create your views here.
 class Order:
     Bill_ = 0
+    @login_required
     def make_order(self, request):
-        if request.session.has_key('user'):
-            User =request.session['user']
-            All = Cart.objects.filter(user=User)
-            total = 0
-            for i in All:
-                total+=i.Total
-            Shipping = 100
-            Order.Bill_ = total + Shipping
-            Data = {'All':All,'User':User,'order_total':total,'Net_Bill':Order.Bill_,'Shipping': Shipping}
-            return render(request,'Order/Cart.html', Data)
-        else:
-            messages.error(request,'You Need to Login First')
-            return redirect('login')
+        User =request.session['user']
+        All = Cart.objects.filter(user=User)
+        total = 0
+        for i in All:
+            total+=i.Total
+        Shipping = 100
+        Order.Bill_ = total + Shipping
+        Data = {'All':All,'User':User,'order_total':total,'Net_Bill':Order.Bill_,'Shipping': Shipping}
+        return render(request,'Order/Cart.html', Data)
 
     def delete_item(self,request,pk):
         Data = Cart.objects.get(title=pk)
         Order.Bill_ = Order.Bill_ - Data.Total
         Cart.objects.filter(title=pk).delete()
-
         return redirect('cart')
 
     # Before Check Out
+    @login_required
     def checkout(self,request):
         All = {'Bill':Order.Bill_}
         return render(request,'Order/Checkout.html',All)
 
     # After CheckOut
+    @login_required
     def Checked(self, request):
-        if request.session.has_key('user'):
             if request.method == 'POST':
                 user = request.session['user']
                 Data = Cart.objects.filter(user=user)
@@ -67,6 +68,7 @@ class Order:
                                  Zip=request.POST['Zip'],
                                  Payment=Pay,All_fields=Items, Amount=Order.Bill_, Date=datetime.datetime.today(),Bill_number=(len(B_L)+1))
                     All_Bill.save(D)
+
                 else:
                     Pay = 'By Card'
                     D = All_Bill(User=user,Receiver=request.POST['Name'],Address=request.POST['Address'],City=request.POST['City'],
@@ -75,28 +77,34 @@ class Order:
                              Exp_Month=request.POST['expmonth'],CVV=request.POST['cvv'],Exp_Year=request.POST['expyear'],
                              Payment=Pay,All_fields=Items, Amount=Order.Bill_, Date=datetime.datetime.today(),Bill_number=(len(B_L)+1))
                     All_Bill.save(D)
+                Order.AdminOrder(user, Order.Bill_, datetime.datetime.today(),(len(B_L)+1))
                 Cart.objects.filter(user=user).delete()
                 return redirect('bill')
             messages.error(request,'Error In Posting Request Try Again')
             return redirect('checked_out')
-        messages.error(request,'Session Time Out')
-        return redirect('checked_out')
+
+
+    @classmethod
+    def AdminOrder(self, name, amount, date, bill):
+        d = PendingOrder(Receiver_Name=name, Amount=amount, Date=date, Bill_number=bill)
+        d.save()
+
 
 
 class Bill:
+    @login_required
     def bills(self,request):
-        if request.session.has_key('user'):
+        # if request.session.has_key('user'):
             user = request.session['user']
             All = All_Bill.objects.filter(User=user)
             Data = {'All':All}
             return render(request,'Order/bill.html', Data)
 
     def bill_detail(self, request, bill_number):
-        if request.session.has_key('user'):
-            All = All_Bill.objects.filter(User=request.session['user'],Bill_number=bill_number )
-            All_items=pickle.loads(All[0].All_fields)
+            All = All_Bill.objects.filter(User=request.session['user'], Bill_number=bill_number)
+            All_items = pickle.loads(All[0].All_fields)
             Data = {'All':All,'All_items':All_items}
-            return render(request,'Order/Bill_Detail.html',Data)
+            return render(request, 'Order/Bill_Detail.html', Data)
 
     @classmethod
     def Quantity_clear(cls,items):
@@ -113,5 +121,52 @@ class Bill:
             Item_data.Available = Available
             Item_data.Sell = Sell
             Item_data.save()
+
+
+class ShippedOrder:
+    def orders(self, request):
+        form = FormB()
+        All_items = PendingOrder.objects.all().order_by('id')
+        filter = ABC(request.GET, queryset=All_items)
+        All_items = filter.qs
+
+        paginator = Paginator(All_items, 10)
+        page = request.GET.get('page')
+        All_items = paginator.get_page(page)
+
+        data = {'All_items': All_items,'form':form, 'filter':filter}
+        return render(request, 'Shopping/orders.html', data)
+
+    def order_detail(self, request, user, bill):
+        D = All_Bill.objects.filter(User=user, Bill_number = bill )
+        All_items = pickle.loads(D[0].All_fields)
+        Data = {'All':D,'All_items': All_items}
+        return render(request, 'Order/Bill_Detail.html', Data)
+
+    def Dispatch(self, request, user, bill):
+        d = PendingOrder.objects.filter(Receiver_Name=user, Bill_number=bill)
+        ShippedOrder.Dis(d[0].Receiver_Name,d[0].Amount, d[0].Date,d[0].Bill_number)
+        d.delete()
+        return redirect('shipped')
+
+    def shipped(self, request):
+        form = FormB()
+        All_items = Dispatched.objects.all().order_by('id')
+        filter = ABC(request.GET, queryset=All_items)
+        All_items = filter.qs
+        paginator = Paginator(All_items, 10)
+        page = request.GET.get('page')
+        All_items = paginator.get_page(page)
+        data = {'All_items': All_items,'form':form, 'filter':filter}
+        return render(request, 'Shopping/shipped.html', data)
+
+
+    @classmethod
+    def Dis(self, name, amount, date, bill):
+        d = Dispatched(Receiver_Name=name, Amount=amount, Date=date, Bill_number=bill)
+        d.save()
+
+
+
 
 
