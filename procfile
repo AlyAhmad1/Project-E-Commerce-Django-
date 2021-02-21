@@ -1,1 +1,1 @@
-web: gunicorn ECM.wsgi --log-file
+web: gunicorn ECM.wsgi
