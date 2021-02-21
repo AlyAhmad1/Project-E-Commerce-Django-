@@ -1,16 +1,22 @@
 {%  extends 'Shopping/base.html' %}
 {% block left_panel %}
 {% endblock %}
+{% block Name %}{{User}}{% endblock %}
 
 {% block content %}
 
 
     <style>
 body {
-  background: #eecda3;
-  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-  background: linear-gradient(to right, #eecda3, #ef629f);
-  min-height: 100vh;
+    background: #6610f2;
+    background: -webkit-linear-gradient(59deg, #17a2b8,Black);
+    background: linear-gradient(180deg, #17a2b8,Black);
+    min-height: 100vh;
+}
+#navbar{
+    background: #6610f2;
+    background: -webkit-linear-gradient(59deg, #17a2b8,Black);
+    background: linear-gradient(180deg, #17a2b8,Black);
 }
 
 
@@ -28,8 +34,8 @@ body {
 
 <div class="px-4 px-lg-0" >
     <!-- For demo purpose -->
-    <div class="container text-white py-5 text-center" style="margin-top:60px;">
-        <h1 class="display-4">{{User}}</h1>
+    <div class="container text-white py-5 text-center" style="margin-top:30px;">
+        <h1 class="display-4"> Thanks {{User}} For Choosing Our Services </h1>
         <p class="lead mb-0">We Provide Your Desires</p>
     </div>
     <!-- End -->
@@ -45,34 +51,38 @@ body {
                             <thead>
                             <tr>
                                 <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">#</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
                                     <div class="p-2 px-3 text-uppercase">Product</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
-                                    <div class="p-2 px-3 text-uppercase">Unit-Price</div>
+                                    <div class="p-2 px-3 text-uppercase text-center">Unit-Price</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Quantity</div>
+                                    <div class="py-2 text-uppercase text-center">Quantity</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Total</div>
+                                    <div class="py-2 text-uppercase text-center">Total</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Remove</div>
+                                    <div class="py-2 text-uppercase text-center">Update</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase text-center">Remove</div>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for i in All %}
                             <tr>
-                                <th scope="row" class="border-0">
-                                    <div class="p-2">
-                                           <h4 class="mb-0"> <a href="{% url 'Details' i.title %}" class="text-dark d-inline-block align-middle">{{i.title}}</a></h4>
-                                   </div>
-                                </th>
-                                <td class="border-0 align-middle"><strong>{{i.Price}}</strong></td>
-                                <td class="border-0 align-middle"><strong>{{i.Quantity}}</strong></td>
-                                <td class="border-0 align-middle"><strong>{{i.Total}}</strong></td>
-                                <td class="border-0 align-middle"><a href="{% url 'delete_item' pk=i.title %}" class="text-dark"><i>Delete</i></a></td>
+                                <td scope="row" class="text">{{forloop.counter}}</td>
+                                <td scope="row" class="text">{{i.title}}</td>
+                                <td class="text-center"><strong>{{i.Price}}</strong></td>
+                                <td class="text-center"><strong>{{i.Quantity}}</strong></td>
+                                <td class="text-center"><strong>{{i.Total}}</strong></td>
+                                <td class="text-center"><a href="{% url 'Details' i.title %}" class="text-dark"><i>> Update</i></a></td>
+                                <td class="text-center"><a href="{% url 'delete_item' pk=i.title %}" class="text-dark"><i>> Delete</i></a></td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -93,7 +103,10 @@ body {
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Net_Total</strong>
                                 <h5 class="font-weight-bold">{{Net_Bill}}</h5>
                             </li>
-                        </ul><a href="{% url 'checkout' %}" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul>
+                        {% if All|length > 0 %}
+                        <a href="{% url 'checkout' %}" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -16,13 +16,13 @@ class FormA(forms.Form):
 
 # For Add Items on Index Page
 class FormB(forms.Form):
-    title = forms.CharField(max_length=30,
+    title = forms.CharField(max_length=50,
                             widget=forms.TextInput(
-                                attrs={"type": "text", "placeholder": "Title"})
+                                attrs={"type": "text", "placeholder": "Title", "max_length": '50'})
                             )
-    Description = forms.CharField(max_length=100,
+    Description = forms.CharField(max_length=200,
                                   widget=forms.TextInput(
-                                      attrs={"type": "text", "placeholder": "Description"})
+                                      attrs={"max_length": '200',"type": "text", "placeholder": "Description"})
                                   )
     Price = forms.FloatField(
         widget=forms.TextInput(

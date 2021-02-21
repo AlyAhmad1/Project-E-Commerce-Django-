@@ -11,12 +11,21 @@
         <div class="row" style="width:1000px;height:350px;margin-bottom:550px;">
             {% for i in All_items %}
             <div class="col-md-3" style="float:none;position:static">
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4" style="box-shadow: 0 4px 8px 0 grey;" >
                     <img src="{{i.Picture.url}}" width="auto" height="200px">
-                    <div class="card-body" style="padding:0px;padding-left:2px;">
-                        <a href="{% url 'Details' i.title %}"> <h3 style="margin:0px;">{{i.title}}</h3></a>
+                    <div class="card-body" style="background:-webkit-linear-gradient(59deg,#17a2b8, white);background: linear-gradient(180deg,#17a2b8, white);padding:0px;text-align:center;">
+                        <h4><a style="color:black;" href="{% url 'Details' i.title %}"><strong>{{i.title|slice:"0:20"}}</strong></a></h4>
+                        <hr style="margin:2px;"/>
                         <small class="text-muted">Price:    ${{i.Price}}</small>
                         <a href="{% url 'del_item' i.title %}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        <hr style="margin:2px;"/>
+                        {% if not i.Recommended %}
+                        <a href="{% url 'recommendedadmin' name=i.title %}" class="btn btn-sm btn-outline-secondary">Recommend to User</a>
+
+                        {% else %}
+                        <a href="{% url 'del_recommendedadmin' name=i.title %}" class="btn btn-sm btn-outline-secondary">Remove from recommend list</a>
+                        {% endif %}
+
                         <br/>
                     </div>
                 </div>
@@ -26,6 +35,7 @@
     </div>
 </div>
 
+<div style="margin-bottom:50px;"></div>
 
 <!--<nav style="position:static;margin-top:120px;margin-left:500px;" aria-label="Page navigation example">-->
 <!--    <ul class="pagination">-->

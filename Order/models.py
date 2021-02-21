@@ -3,7 +3,6 @@ from django.db import models
 import django
 
 
-
 # Data Contain After CheckOut
 class All_Bill(models.Model):
     User = models.CharField(max_length=50, null=True)          # Who is Buying the item

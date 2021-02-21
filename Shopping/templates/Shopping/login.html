@@ -1,6 +1,9 @@
 {% extends 'Shopping/base.html' %}
-
 {% block content %}
+
+
+{% block NO_Name %}
+{% endblock %}
 
 {% block right_panel %}
 {% endblock %}
@@ -18,9 +21,11 @@
     <form class="form-signin" action="{% url 'Submit' %}" method="POST">
     <h1 class="h3 mb-3 font-weight-normal">Sign-Up</h1>
     {% csrf_token %}
-    {{ form.Email }}
-    {{ form.Password }}
-    <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">Sign-Up</button>
+       {{ form.Email }}
+       {{ form.Password }}
+
+
+       <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">Sign-Up</button>
     <p class="mt-5 mb-3 text-muted">Powered By Ali Ahmad</p>
     </form>
 

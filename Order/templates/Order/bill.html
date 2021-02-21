@@ -1,28 +1,22 @@
-<!--{%  extends 'Shopping/base.html' %}-->
+{%  extends 'Shopping/base.html' %}
 {% block left_panel %}
 {% endblock %}
+{% block Name %}{{user}}{% endblock %}
 
 {% block content %}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
 body {
-  background: #eecda3;
-  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-  background: linear-gradient(to right, #eecda3, #ef629f);
+    background: #6610f2;
+    background: -webkit-linear-gradient(59deg, #17a2b8,Black);
+    background: linear-gradient(180deg, #17a2b8,Black);
 }
     </style>
 
-<!-- For demo purpose -->
-<div class="container text-Black py-5 text-center" style="margin-top:60px;">
-    <h1 class="display-4">Bills</h1>
-    <p class="lead mb-0">We Provide Your Desires</p>
-</div>
 
 
-
-<table class="table table-dark table-bordered" style="width:90%;margin-right:10px;margin-left:40px; margin-bottom:210px;">
-
+<table class="table table-light table-bordered" style="width:90%;margin-top:60px;margin-right:10px;margin-left:40px; margin-bottom:210px;">
     <thead class="thead-dark">
     <tr >
         <th style="text-align:center;" scope="col">#</th>
@@ -41,10 +35,10 @@ body {
         <td>{{i.Bill_number}}</td>
         <td>{{i.Amount}}</td>
         <td>{{i.Date}}</td>
-        <td><a href="{% url 'bill_detail' bill_number=i.Bill_number %}">Details</a></td>
+        <td><a style="color:black" href="{% url 'bill_detail' bill_number=i.Bill_number %}">>>>Details </a></td>
     </tr>
     {% endfor %}
-     </tbody>
+    </tbody>
 
 </table>
 

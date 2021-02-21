@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
-from Shopping.models import Cart, Item,Stock
+from Shopping.models import Cart, Item,Stock, RecommendUser
 from .models import All_Bill, PendingOrder, Dispatched
 from django.contrib import messages
 import _pickle as pickle
@@ -17,13 +17,13 @@ class Order:
     @login_required
     def make_order(self, request):
         User =request.session['user']
-        All = Cart.objects.filter(user=User)
+        All = Cart.objects.filter(user=request.session['user'])
         total = 0
         for i in All:
             total+=i.Total
         Shipping = 100
         Order.Bill_ = total + Shipping
-        Data = {'All':All,'User':User,'order_total':total,'Net_Bill':Order.Bill_,'Shipping': Shipping}
+        Data = {'All':All,'User':User, 'order_total':total,'Net_Bill':Order.Bill_,'Shipping': Shipping}
         return render(request,'Order/Cart.html', Data)
 
     def delete_item(self,request,pk):
@@ -45,11 +45,15 @@ class Order:
                 user = request.session['user']
                 Data = Cart.objects.filter(user=user)
                 All_items = []
+                product_recommend = []
                 for i in Data:
                     A = [i.title,i.Price,i.Quantity,i.Total]
                     All_items.append(A)
+                    product_recommend.append(i.title)
                     A = []
                 Items = pickle.dumps(All_items)
+                product = pickle.dumps(product_recommend)
+
                 try:
                     P = request.POST['payment']
                 except:
@@ -77,18 +81,21 @@ class Order:
                              Exp_Month=request.POST['expmonth'],CVV=request.POST['cvv'],Exp_Year=request.POST['expyear'],
                              Payment=Pay,All_fields=Items, Amount=Order.Bill_, Date=datetime.datetime.today(),Bill_number=(len(B_L)+1))
                     All_Bill.save(D)
+
+                # Saving for Products Recommendation
+                C = RecommendUser(RP=product)
+                RecommendUser.save(C)
+
                 Order.AdminOrder(user, Order.Bill_, datetime.datetime.today(),(len(B_L)+1))
                 Cart.objects.filter(user=user).delete()
                 return redirect('bill')
             messages.error(request,'Error In Posting Request Try Again')
             return redirect('checked_out')
 
-
     @classmethod
     def AdminOrder(self, name, amount, date, bill):
         d = PendingOrder(Receiver_Name=name, Amount=amount, Date=date, Bill_number=bill)
         d.save()
-
 
 
 class Bill:
@@ -97,7 +104,7 @@ class Bill:
         # if request.session.has_key('user'):
             user = request.session['user']
             All = All_Bill.objects.filter(User=user)
-            Data = {'All':All}
+            Data = {'All':All,'user':user}
             return render(request,'Order/bill.html', Data)
 
     def bill_detail(self, request, bill_number):

@@ -1,0 +1,84 @@
+{% extends 'Shopping/base.html' %}
+{% block left_panel %}
+{% endblock %}
+{% block right_panel %}
+{% endblock %}
+
+{% block content %}
+<style>
+
+.form-popup {
+  position: fixed;
+  width: 300px;
+  left:450px;
+  bottom:0px;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 8px;
+  background-color: white;
+  border-radius: 15px 50px;
+  background: -webkit-linear-gradient(59deg, #17a2b8,Black);
+  background: linear-gradient(180deg, #17a2b8,Black);
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=number] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  cursor: pointer;
+  width: 45%;
+  border:none;
+  border-radius: 25px;
+  margin-left:10px;
+  opacity:1;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+
+
+<div class="form-popup" id="myForm"  >
+    <form method="POST" action="{% url 'stock' %}" style="border:5px solid Black;color:Black;" enctype='multipart/form-data' id="FF" class="form-container">
+        <h1 style="color:white;">Add Item</h1>
+        {% csrf_token %}
+        <label style="color:white;">Product:</label>
+        <input type="text" name="title"  value="{{name}}" >
+        <label style="color:white;">Price:</label>
+        <input type="number" name="Price" value="{{price}}">
+        <label style="color:white;">Buy Rate</label>
+        <input type="number" name="buy" id="BB" value="{{buy_rate}}">
+        <label style="color:white;">Available Quantity</label>
+        <input type="number" name="Quantity" id="QQ" value="{{available}}">
+        <button style="margin-top:10px" id="Done" type="submit" class="btn">Update</button>
+        <button style="background-color:Red;margin-top:8px;" type="button" onclick="history.go(-1)" class="btn">Cancel</button>
+    </form>
+</div>
+{% endblock %}
