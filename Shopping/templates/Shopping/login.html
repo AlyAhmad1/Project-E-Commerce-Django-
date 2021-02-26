@@ -8,23 +8,35 @@
 {% block right_panel %}
 {% endblock %}
 
-{% if messages %}
-{% for i in messages %}
-
-<h5 style="margin-top:50px;text-align:center;background-color:Red;width:100%">{{i}}</h5>
-
-{% endfor %}
+{% if signup %}
+<div class="text-black  text-center" style="padding:3px;margin-top:50px;background-color:#5a88ca;">
+   <h1 class="display-4">Sign-Up</h1>
+   <p class="lead mb-0">We Provide Your Desires</p>
+</div>
+{% else %}
+<div class="text-black  text-center" style="padding:3px;margin-top:50px;background-color:#5a88ca;">
+   <h1 class="display-4">Login</h1>
+   <p class="lead mb-0">We Provide Your Desires</p>
+</div>
 {% endif %}
+<!--{% if messages %}-->
+<!--{% for i in messages %}-->
 
-<div style="border:2px solid GREY;box-shadow:2px 2px 4px #000000;border-radius:10px; padding:5px;margin-left:390px;margin-top:100px;width:30%;margin-bottom:75px;" class="text-center" data-new-gr-c-s-check-loaded="14.983.0">
+<!--<h5 style="text-align:center;background-color:Red;width:100%">{{i}}</h5>-->
+
+<!--{% endfor %}-->
+<!--{% endif %}-->
+
+<div style="border:2px solid GREY;box-shadow:2px 2px 4px #000000;border-radius:10px; padding:5px;margin-left:410px;margin-top:100px;width:30%;margin-bottom:75px;" class="text-center" data-new-gr-c-s-check-loaded="14.983.0">
  {% if signup %}
+
+
     <form class="form-signin" action="{% url 'Submit' %}" method="POST">
     <h1 class="h3 mb-3 font-weight-normal">Sign-Up</h1>
     {% csrf_token %}
        {{ form.Email }}
        {{ form.Password }}
-
-
+       <input type="hidden" name="next" value="{{R}}" >
        <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">Sign-Up</button>
     </form>
 
@@ -34,10 +46,10 @@
     {% csrf_token %}
     {{ form.Email }}
     {{ form.Password }}
+    <input type="hidden" name="next" value="{{R}}" >
     <button style="margin-top:30px;" class="btn btn-lg btn-primary btn-block" type="submit">login</button>
     </form>
         {% endif %}
-
 </div>
 
 

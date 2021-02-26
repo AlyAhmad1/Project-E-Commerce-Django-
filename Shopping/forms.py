@@ -26,11 +26,11 @@ class FormB(forms.Form):
                                   )
     Price = forms.FloatField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Buy_Price_Per_item"})
+            attrs={"placeholder": "Price Per Item"})
     )
     Quantity = forms.FloatField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Available_Quantity"})
+            attrs={"placeholder": "Available Quantity"})
     )
     Image = forms.ImageField()
 

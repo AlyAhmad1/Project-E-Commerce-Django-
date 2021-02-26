@@ -9,7 +9,7 @@ from Shopping import login_required
 from Shopping.forms import FormB
 from django.core.paginator import Paginator
 from Shopping.filte import ABC
-
+import math
 
 # Create your views here.
 class Order:
@@ -22,8 +22,9 @@ class Order:
         for i in All:
             total+=i.Total
         Shipping = 100
-        Order.Bill_ = total + Shipping
-        Data = {'All':All,'User':User, 'order_total':total,'Net_Bill':Order.Bill_,'Shipping': Shipping}
+        Order.Bill_ = math.ceil(total) + Shipping
+        Data = {'All':All,'User':User, 'order_total':math.ceil(total),'Net_Bill':Order.Bill_,'Shipping': Shipping}
+        # return render(request,'Order/cart1.html', Data)
         return render(request,'Order/Cart.html', Data)
 
     def delete_item(self,request,pk):

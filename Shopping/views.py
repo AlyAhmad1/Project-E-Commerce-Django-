@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import FormA, FormB
 from .models import Logs, Item, Comment, Cart, Stock, Rating, RecommendedAdmin, RecommendedRating, RecommendedSearch, RecommendUser
@@ -27,8 +28,6 @@ class VIEWS:
         else:
             filter = ABC(request.POST, queryset=all_items)
             all_items = filter.qs
-
-
         paginator = Paginator(all_items,10)
         page = request.GET.get('page')
         all_items = paginator.get_page(page)
@@ -39,24 +38,81 @@ class VIEWS:
                 data = {'form': form,'All_items': all_items, 'se': se, 'filter':filter}
                 return render(request,'Shopping/Admin_dashboard.html', data)
             user = True
+            # Products Related to your search
+            C = RecommendedSearch.objects.filter(User=request.session['user'])
+            if len(C) == 0:
+                Z = [[],'']
+            else:
+                Z = [C,'Products Related to your search']
         else:
             se = False
             user = False
-        data = {'form': form, 'se': se, 'All_items': all_items, 'User': user, 'filter':filter}
-        return render(request, 'Shopping/Index.html',data)
+            C =[]
+            Z = [C,'']
+        # Hot-Offers
+        A = RecommendedAdmin.objects.all()
+        # Products Have High Rating
+        B = RecommendedRating.objects.all()
+
+
+        if len(B) == 0:
+            YY = [[],'']
+        else:
+            YY = [B,'Products Have High Rating']
+        if len(A) == 0:
+            XX = [[],'']
+        else:
+            XX = [A,'Hot Offer']
+
+        allProds = [XX,YY,Z]
+        data = {'form': form, 'se': se, 'All_items': all_items, 'User': user, 'filter':filter, 'allProds':allProds}
+        return render(request, 'Shopping/index1.html',data)
+
+    def shop(self, request):
+        form = FormB()
+        all_items = Item.objects.all()
+        if request.method == 'POST' and request.session.has_key('user'):
+            filter = ABC(request.POST, queryset=all_items)
+            all_items = filter.qs
+            for i in all_items:
+                try:
+                    r_u = RecommendedSearch(User=request.session['user'] ,title=i.title, Description=i.Description, Price=i.Price, Time=i.Time, Picture=i.Picture, Quantity=i.Quantity)
+                    r_u.save()
+                except:
+                    continue
+        else:
+            filter = ABC(request.POST, queryset=all_items)
+            all_items = filter.qs
+        paginator = Paginator(all_items,8)
+        page = request.GET.get('page')
+        all_items = paginator.get_page(page)
+        if request.session.has_key('user'):
+            se = request.session['user']
+            if se == 'admin':
+                # data = {'form': form,'All_items': all_items, 'se': se, 'filter':filter}
+                # return render(request,'Shopping/Admin_dashboard.html', data)
+                pass
+            user = True
+        else:
+            se = False
+            user = False
+        data = {'form': form,'All_items':all_items, 'User':user, 'filter':filter}
+        return render(request, 'Shopping/shop.html', data)
+
 
     def add_Item(self,request):
         all = FormB(request.POST,request.FILES)
         if all.is_valid():
             query = Item.objects.filter(title=request.POST['title'])
-            if query is None:
+            if query:
                 messages.error(request, 'Error Tittle Already Existed')
                 return redirect('HOME')
 
             data = Item(title=request.POST['title'],Description=request.POST['Description'],Price=request.POST['Price'],
                        Picture=request.FILES['Image'], Time = datetime.now(), Quantity = request.POST['Quantity'])
             Item.save(data)
-            Sell_Price = (int(request.POST['Price']) * 0.1) + int(request.POST['Price'])
+            # Sell_Price = ceil(int(request.POST['Price']) * 0.1) + int(request.POST['Price'])
+            Sell_Price = ceil(float(request.POST['Price']))
             S = Stock(title= request.POST['title'], Buy_rate= request.POST['Price'],
                       Sell_rate=Sell_Price, Quantity= request.POST['Quantity'],Available=request.POST['Quantity'])
             Stock.save(S)
@@ -73,7 +129,6 @@ class VIEWS:
     def details(self,request,pk):
         try:
             global se, User
-            rated = True
             if request.method == 'POST':
                 item = request.POST['item']
                 user = request.session['user']
@@ -95,13 +150,17 @@ class VIEWS:
                 else:
                     rated = False
             else:
-                rated = True
+                rated = False
                 se = False
                 User = False
                 L = False
             All = Item.objects.filter(title=pk)
             All1 = Stock.objects.filter(title=pk)
             comments = Comment.objects.filter(title=pk)
+            if request.session.has_key('user'):
+                comments_once = Comment.objects.filter(title=pk, commenter=request.session['user'])
+            else:
+                comments_once = []
             form = FormB()
             R_check = Rating.objects.filter(item=pk).all()
             f=s=t=fo=fi=0
@@ -128,7 +187,6 @@ class VIEWS:
             except Exception as e:
                 print(e)
                 pass
-
             R = RecommendUser.objects.all()
             SSS = []
             for i in R:
@@ -147,11 +205,13 @@ class VIEWS:
                     except:
                         continue
                     slider_items.append(z)
-            Data = {'L':L, 'All':All, 'comments':comments,'form':form,'All1':All1, 'check': se,'User': User, 'Rated': rated, 'R_star':R_star, 'slider_items':slider_items}
-        except:
-            messages.error(request,'Error in Loading Item May Be it is no More Existed in Stock')
-            return redirect('HOME')
-        return render(request,'Shopping/Details.html',Data)
+
+            C_E =len(slider_items)
+            Data = {'L':L, 'All':All, 'comments':comments,'form':form,'All1':All1, 'check': se,'User': User, 'Rated': rated, 'R_star':R_star, 'slider_items':slider_items,
+                    'C_E':C_E, 'comments_once':len(comments_once)}
+        except Exception as e:
+            return HttpResponse(e)
+        return render(request,'Shopping/Detail1.html',Data)
 
     def comment(self, request, pk):
         if request.session.has_key('user'):
@@ -160,10 +220,10 @@ class VIEWS:
                 title = pk
                 Data = Comment(title=title,comment=comment,commenter=request.session['user'])
                 Comment.save(Data)
-                return redirect('Details', pk=pk)
+                return redirect('Details1', pk=pk)
             return redirect('HOME')
         else:
-            messages.error(request, 'Before Commenting You Need to Login first')
+            # messages.error(request, 'Before Commenting You Need to Login first')
             return redirect('login')
 
     def delete_comment(self,request,pk,t):
@@ -177,20 +237,21 @@ class VIEWS:
             Price = request.POST['Price']
             Quantity = request.POST['Quantity']
             user = request.session['user']
-            Total = float(Quantity) * float(Price)
+            Total = ceil(float(Quantity) * float(Price))
             Data = Cart(title=title,Price=Price,Quantity=Quantity,Total=Total, user=user)
             Data.save()
-            return redirect('Details', pk=title)
+            return redirect('Details1', pk=title)
 
 
 class Log:
     def signup(self,request):
         if request.session.has_key('user'):
-            messages.error(request,'Please First Logout Then Signup Thanks')
+            # messages.error(request,'Please First Logout Then Signup Thanks')
             return redirect('HOME')
         else:
             form=FormA()
-            Data = {'form':form, 'signup':True}
+            R = request.META.get('HTTP_REFERER')
+            Data = {'form':form, 'signup':True, 'R':R}
             return render(request, 'Shopping/login.html', Data)
 
     # it is for saving User Sign-Up
@@ -206,16 +267,17 @@ class Log:
                 F = Logs(Email=request.POST['Email'],Password=request.POST['Password'])
                 Logs.save(F)
                 request.session['user'] = str(request.POST['Email']).split('@')[0]
-                return redirect('HOME')
+                return redirect(request.POST['next'])
         return redirect('signup')
 
     def login(self,request):
         if request.session.has_key('user'):
-            messages.error(request,'You Are Already Login')
+            # messages.error(request,'You Are Already Login')
             return redirect('HOME')
         else:
+            R = request.META.get('HTTP_REFERER')
             form=FormA()
-            Data = {'form':form, 'signup':False}
+            Data = {'form':form, 'signup':False, 'R':R}
             return render(request, 'Shopping/login.html', Data)
 
     def check(self,request):
@@ -226,13 +288,19 @@ class Log:
             for i in range(0,len(All)):
                 if All[i].Email==E and All[i].Password==P:
                     request.session['user'] = str(All[i].Email).split('@')[0]
-                    return redirect('HOME')
+                    if 'admin' == request.session['user']:
+                        return redirect('HOME')
+                    return redirect(request.POST.get('next'))
             return redirect('login')
 
     def logout(self, request):
+        if request.session['user'] == 'admin':
+            R = 'HOME'
+        else:
+            R = request.META.get('HTTP_REFERER')
         del request.session['user']
-        messages.error(request,'You are Logged Out')
-        return redirect('HOME')
+        # messages.error(request,'You are Logged Out')
+        return redirect(R)
 
 
 class StockManage:
@@ -242,14 +310,14 @@ class StockManage:
     def stock(self, request):
         if request.method == 'POST':
             name = request.POST['title']
-            sell_rate = request.POST['Price']
+            # sell_rate = request.POST['Price']
             available = request.POST['Quantity']
             buy_rate = request.POST['buy']
             d = Stock.objects.get(title=name)
             d.title = name
             d.Buy_rate = buy_rate
             d.Available = available
-            d.Sell = sell_rate
+            # d.Sell = sell_rate
             d.Quantity += int(available)
             d.save()
             messages.error(request,f'Updated Field {name}')
@@ -272,11 +340,22 @@ class StockManage:
     def del_stock(self, request, name):
         Stock.objects.get(title=name).delete()
         Item.objects.get(title=name).delete()
-        Rating.objects.get(item=name).delete()
-        RecommendedSearch.objects.get(title=name).delete()
-        RecommendedAdmin.objects.get(title=name).delete()
-        RecommendedRating.objects.get(title=name).delete()
-
+        try:
+            Rating.objects.get(item=name).delete()
+        except:
+            pass
+        try:
+            RecommendedSearch.objects.get(title=name).delete()
+        except:
+            pass
+        try:
+            RecommendedAdmin.objects.get(title=name).delete()
+        except:
+            pass
+        try:
+            RecommendedRating.objects.get(title=name).delete()
+        except:
+            pass
         messages.error(request, f'Deleted Field {name}')
         return redirect('stock')
 
@@ -301,13 +380,15 @@ class ForYou:
         all.save()
         R = RecommendedAdmin(title=all.title, Description=all.Description,Price=all.Price,Time=all.Time,Picture=all.Picture, Quantity=all.Quantity)
         RecommendedAdmin.save(R)
+        R_S = request.META.get('HTTP_REFERER')
         messages.error(request, f'{name} Added in Recommended List')
-        return redirect('HOME')
+        return redirect(R_S)
 
     def del_R_A(self,request,name):
         RecommendedAdmin.objects.filter(title=name).delete()
         R = Item.objects.get(title=name)
         R.Recommended = False
         R.save()
+        R_S = request.META.get('HTTP_REFERER')
         messages.error(request, f'{name} Removed from Recommended List')
-        return redirect('HOME')
+        return redirect(R_S)

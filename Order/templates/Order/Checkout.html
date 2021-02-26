@@ -9,10 +9,8 @@
 body {
   font-family: Arial;
   font-size: 17px;
-  padding: 8px;
-  background: #6610f2;
-  background: -webkit-linear-gradient(59deg, #17a2b8,Black);
-  background: linear-gradient(180deg, #17a2b8,Black);
+<!--    background: -webkit-linear-gradient(59deg, #0099ff,white);-->
+<!--    background: linear-gradient(180deg, #0099ff,Black);-->
 }
 
 * {
@@ -129,14 +127,13 @@ display: none;
 {% endif %}
 
 
-<!-- For demo purpose -->
-<div class="container text-Black py-5 text-center" style="margin-top:10px;">
-    <h1 class="display-4" style="color:white;">Total Bill {{Bill}}</h1>
+<div class="text-white text-center" style="padding:3px;background-color:#5a88ca;margin-top:40px;margin-bottom:4px;">
+    <h1 class="display-4" style="">Total-Bill: {{Bill}}</h1>
     <h4><a href="{% url 'cart' %}" style="color:white;">View Cart</a></h4>
 </div>
 
 
-<div class="row" >
+<div class="row" style="  background-color: white;">
     <div class="col-75">
         <div class="container1" >
             <form action="{% url 'checked_out' %}" method="POST">
@@ -200,7 +197,7 @@ display: none;
                                 <input type="text" id="cvv" name="cvv" placeholder="352">
                             </div>
                         </div>
-                            <button type="button" id="Normal" class="btn btn-danger">Cancel</button>
+<!--                            <button type="button" id="Normal" class="btn btn-danger">Cancel</button>-->
                         </div>
 
                     </div>
@@ -235,16 +232,12 @@ else{
 if ($("#A2").is(":checked")) {
   document.getElementById("OK").style.display = "block";
         $("#form").show();
-
 }
 else{
   document.getElementById("OK").style.display = "none";
       $("#form").hide();
-
 }
-
 });
-
 
 });
 </script>

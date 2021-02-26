@@ -14,7 +14,7 @@
                 <div class="card mb-4" style="box-shadow: 0 4px 8px 0 grey;" >
                     <img src="{{i.Picture.url}}" width="auto" height="200px">
                     <div class="card-body" style="background:-webkit-linear-gradient(59deg,#17a2b8, white);background: linear-gradient(180deg,#17a2b8, white);padding:0px;text-align:center;">
-                        <h4><a style="color:black;" href="{% url 'Details' i.title %}"><strong>{{i.title|slice:"0:20"}}</strong></a></h4>
+                        <h4><a style="color:black;" href="{% url 'Details1' i.title %}"><strong>{{i.title|slice:"0:20"}}</strong></a></h4>
                         <hr style="margin:2px;"/>
                         <small class="text-muted">Price:    ${{i.Price}}</small>
                         <a href="{% url 'del_item' i.title %}" class="btn btn-sm btn-outline-secondary">Delete</a>
