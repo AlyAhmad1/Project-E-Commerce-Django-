@@ -96,7 +96,7 @@ class VIEWS:
         else:
             se = False
             user = False
-        data = {'form': form,'All_items':all_items, 'User':user, 'filter':filter}
+        data = {'form': form,'All_items':all_items, 'User':user, 'filter':filter, 'se':se}
         return render(request, 'Shopping/shop.html', data)
 
 
@@ -223,7 +223,6 @@ class VIEWS:
                 return redirect('Details1', pk=pk)
             return redirect('HOME')
         else:
-            # messages.error(request, 'Before Commenting You Need to Login first')
             return redirect('login')
 
     def delete_comment(self,request,pk,t):
@@ -246,7 +245,6 @@ class VIEWS:
 class Log:
     def signup(self,request):
         if request.session.has_key('user'):
-            # messages.error(request,'Please First Logout Then Signup Thanks')
             return redirect('HOME')
         else:
             form=FormA()
@@ -272,7 +270,6 @@ class Log:
 
     def login(self,request):
         if request.session.has_key('user'):
-            # messages.error(request,'You Are Already Login')
             return redirect('HOME')
         else:
             R = request.META.get('HTTP_REFERER')

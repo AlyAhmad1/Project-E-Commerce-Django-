@@ -59,12 +59,14 @@
                         <li><a href="{% url 'signup' %}">SignUp</a></li>
                         {% endif %}
                     </ul>
+                    {% if se and se != 'admin' %}
                     <form style="margin-top:10px;color:black;float:right;" method="POST">
                         {{filter.form.Search}}
                         {%csrf_token %}
                         <input type="hidden" name="SEARCH" value="True">
                         <button style="padding:3px;" class="btn btn-success" type="submit">Search</button>
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -85,8 +85,10 @@
                         <li><a href="{% url 'shop' %}">Shop</a></li>
                         <li class="active"><a href="#">Details</a></li>
                         {% if check %}
+                        {% if not User %}
                         <li><a href="{% url 'cart' %}">Cart <i class="fa fa-shopping-cart"></i></a></li>
                         <li><a href="{% url 'bill' %}">Bills</a></li>
+                        {% endif %}
                         <li><a href="{% url 'logout' %}">LogOut</a></li>
                         {% else %}
                         <li><a href="{% url 'signup' %}">SignUp</a></li>
@@ -128,9 +130,9 @@
                                 <div class="product-inner" >
                                     <h2 class="product-name">{{ All.0.title }}</h2>
                                     <div class="product-inner-price">
-                                        <ins>Rs {{All.0.Price}}</ins>
+                                        <ins>BDT {{All.0.Price}}</ins>
                                     </div>
-                                    {% if check %}
+                                    {% if check and not User %}
                                     <form method="POST" action="{% url 'Adding_cart' %}" style="" enctype='multipart/form-data' id="FF" class="form-container">
                                         <div class="quantity">
                                             {% if All1.0.Available > 0 %}
@@ -213,7 +215,8 @@
                                 </div>
                             </div>
                         </div>
-<!--                        {% if not C_E == 0 %}-->
+                                        {% if check and not User %}
+                    {% if not C_E == 0 %}
                         <div class="related-products-wrapper" >
                             <h2 class="related-products-title">Related Products</h2>
                             <div class="related-products-carousel"  style="">
@@ -233,7 +236,8 @@
                                 {% endfor %}
                             </div>
                         </div>
-<!--                    {% endif %}-->
+                    {% endif %}
+                    {% endif %}
                     </div>
         <div style="width:30%;margin-left:800px;margin-top:0px;">
         <h1 >Reviews</h1>
