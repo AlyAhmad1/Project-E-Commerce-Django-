@@ -83,7 +83,7 @@ class VIEWS:
         else:
             filter = ABC(request.POST, queryset=all_items)
             all_items = filter.qs
-        paginator = Paginator(all_items,8)
+        paginator = Paginator(all_items,15)
         page = request.GET.get('page')
         all_items = paginator.get_page(page)
         if request.session.has_key('user'):
