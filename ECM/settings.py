@@ -84,7 +84,7 @@ DATABASES = {
         'NAME':'Ecommerce',
         'USER': 'postgres',
         'PASSWORD': 'damit786',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
