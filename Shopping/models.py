@@ -49,14 +49,14 @@ class RecommendUser(models.Model):
 
 
 class Comment(models.Model):
-    title = models.CharField(max_length=50) # the post on which user commenting
+    title = models.CharField(max_length=50)
     comment = models.CharField(max_length=500)
-    commenter = models.CharField(max_length=500, null=True)    # user name who is commenting
+    commenter = models.CharField(max_length=500, null=True)
 
 
 class Cart(models.Model):
     user = models.CharField(max_length=50, default='')
-    title = models.CharField(primary_key=True,max_length=50)
+    title = models.CharField(primary_key=True, max_length=50)
     Quantity = models.FloatField()
     Price = models.FloatField()
     Total = models.FloatField()
