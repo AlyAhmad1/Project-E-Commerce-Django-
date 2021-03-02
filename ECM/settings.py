@@ -134,13 +134,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "Order\static"),
+    os.path.join(BASE_DIR, "Shopping\static"),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, "new-static","static-root")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "new-static", "media-root")
-
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
