@@ -15,7 +15,7 @@ import _pickle as pickle
 class VIEWS:
     def index(self,request):
         form = FormB()
-        all_items = Item.objects.all()
+        all_items = Item.objects.all().order_by('title')
         if request.method == 'POST' and request.session.has_key('user'):
             filter = ABC(request.POST, queryset=all_items)
             all_items = filter.qs
@@ -70,7 +70,7 @@ class VIEWS:
 
     def shop(self, request):
         form = FormB()
-        all_items = Item.objects.all()
+        all_items = Item.objects.all().order_by('title')
         if request.method == 'POST' and request.session.has_key('user'):
             filter = ABC(request.POST, queryset=all_items)
             all_items = filter.qs
