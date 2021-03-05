@@ -16,7 +16,7 @@
                     <div class="card-body" style="background:-webkit-linear-gradient(59deg,#17a2b8, white);background: linear-gradient(180deg,#17a2b8, white);padding:0px;text-align:center;">
                         <h4><a style="color:black;" href="{% url 'Details1' i.title %}"><strong>{{i.title|slice:"0:20"}}</strong></a></h4>
                         <hr style="margin:2px;"/>
-                        <small class="text-muted">Price:    ${{i.Price}}</small>
+                        <small class="text-muted">BDT {{i.Price}}</small>
                         <a href="{% url 'del_item' i.title %}" class="btn btn-sm btn-outline-secondary">Delete</a>
                         <hr style="margin:2px;"/>
                         {% if not i.Recommended %}

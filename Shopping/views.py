@@ -260,7 +260,7 @@ class Log:
                 All = Logs.objects.all()
                 for i in range(0,len(All)):
                     if All[i].Email==request.POST['Email']:
-                        messages.error(request,'USER ALREADY EXISTED PLEASE TRY ANOTHER EMAIL')
+                        messages.error(request,'Email Already Registered')
                         return redirect('signup')
                 F = Logs(Email=request.POST['Email'],Password=request.POST['Password'])
                 Logs.save(F)
@@ -288,6 +288,7 @@ class Log:
                     if 'admin' == request.session['user']:
                         return redirect('HOME')
                     return redirect(request.POST.get('next'))
+            messages.error(request,'Error Incorrect Email or Password try again!!! ')
             return redirect('login')
 
     def logout(self, request):
@@ -296,7 +297,6 @@ class Log:
         else:
             R = request.META.get('HTTP_REFERER')
         del request.session['user']
-        # messages.error(request,'You are Logged Out')
         return redirect(R)
 
 

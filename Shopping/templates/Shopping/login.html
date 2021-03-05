@@ -29,6 +29,12 @@
 <!--{% endif %}-->
 
 <div style="border:2px solid GREY;box-shadow:2px 2px 4px #000000;border-radius:10px; padding:5px;margin-left:410px;margin-top:100px;width:30%;margin-bottom:75px;" class="text-center" data-new-gr-c-s-check-loaded="14.983.0">
+   {% if messages %}
+   {% for i in messages %}
+   <h5 style="text-align:center;background-color:Red;width:100%">{{i}}</h5>
+   {% endfor %}
+   {% endif %}
+
  {% if signup %}
 
 
