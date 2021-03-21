@@ -149,11 +149,11 @@ class VIEWS:
                     se = True
                     User = True
                     rated = True
-                    L = False
+                    L = True
             elif request.session.has_key('user'):
                 se = True
                 User = False
-                L = request.session['user']
+                L = True
                 Rates = Rating.objects.filter(user=request.session['user'],item=pk).first()
                 if Rates:
                     rated = range(0, Rates.value)
@@ -195,7 +195,6 @@ class VIEWS:
                     if RecommendedRating(title=All[0].title):
                         RecommendedRating(title=All[0].title).delete()
             except Exception as e:
-                print(e)
                 pass
             R = RecommendUser.objects.all()
             SSS = []
