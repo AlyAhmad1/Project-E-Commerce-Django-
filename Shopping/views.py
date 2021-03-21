@@ -149,7 +149,7 @@ class VIEWS:
                     se = True
                     User = True
                     rated = True
-                    L = True
+                    L = False
             elif request.session.has_key('user'):
                 se = True
                 User = False
