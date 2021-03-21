@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Logs, Item, Comment, Cart, Stock, Rating, RecommendedAdmin, RecommendedRating, RecommendedSearch,RecommendUser
+from .models import Logs, Item, Comment, Cart, Stock, Rating, RecommendedAdmin, RecommendedRating, RecommendedSearch,RecommendUser, Carousel
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ admin.site.register(RecommendedRating)
 admin.site.register(RecommendedSearch)
 admin.site.register(RecommendedAdmin)
 admin.site.register(RecommendUser)
+admin.site.register(Carousel)

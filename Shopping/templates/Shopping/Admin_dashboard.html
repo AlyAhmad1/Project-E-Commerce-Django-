@@ -20,10 +20,16 @@
                         <a href="{% url 'del_item' i.title %}" class="btn btn-sm btn-outline-secondary">Delete</a>
                         <hr style="margin:2px;"/>
                         {% if not i.Recommended %}
-                        <a href="{% url 'recommendedadmin' name=i.title %}" class="btn btn-sm btn-outline-secondary">Recommend to User</a>
+                        <a href="{% url 'recommendedadmin' name=i.title %}" class="btn btn-primary">Recommend to User</a>
 
                         {% else %}
-                        <a href="{% url 'del_recommendedadmin' name=i.title %}" class="btn btn-sm btn-outline-secondary">Remove from recommend list</a>
+                        <a href="{% url 'del_recommendedadmin' name=i.title %}" class="btn btn-danger">Remove from recommend list</a>
+                        {% endif %}
+                        <hr style="margin:2px;"/>
+                        {% if not i.Crousal %}
+                        <a href="{% url 'Carousel' name=i.title %}" class="btn btn-primary">Add To Carousel List</a>
+                        {% else %}
+                        <a href="{% url 'del_Carousel' name=i.title %}" class="btn btn-danger">Remove from  Carousel</a>
                         {% endif %}
 
                         <br/>
@@ -35,7 +41,7 @@
     </div>
 </div>
 
-<div style="margin-bottom:50px;"></div>
+<div style="margin-bottom:200px;"></div>
 
 <!--<nav style="position:static;margin-top:120px;margin-left:500px;" aria-label="Page navigation example">-->
 <!--    <ul class="pagination">-->

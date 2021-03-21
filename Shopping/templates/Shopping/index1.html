@@ -70,32 +70,26 @@
         	<!-- Slider -->
 			<div class="block-slider block-slider4">
                 <ul class="" id="bxslider-home4">
-                    <li>
-                        <img src="{% static 'Shopping/img/h4-slide.png' %}" alt="Slide">
-                        <div class="caption-group">
-                            <h2 class="caption title">
-                                iPhone <span class="primary">6 <strong>Plus</strong></span>
-                            </h2>
-                            <h4 class="caption subtitle">Dual SIM</h4>
-<!--                            <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>-->
-                        </div>
+                    {% if check_carousel == 0 %}
+                    <li style="height:350px;">
+                        <h1 style="margin-top:170px;text-align:center;">Sorry No item to Display</h1>
                     </li>
-                    <li><img src="{% static 'Shopping/img/h4-slide3.png' %}" alt="Slide">
-                        <div class="caption-group">
+                    {% else %}
+                    {% for i in carousel_data %}
+                    <li style="height:350px;">
+<!--                        <img src="{% static 'Shopping/img/h4-slide.png' %}" alt="Slide">-->
+                        <img src="{{i.Picture.url}}" alt="Slide">
+                        <div class="caption-group" style="width:40%;">
                             <h2 class="caption title">
-                                Apple <span class="primary">Store <strong>Ipod</strong></span>
+                                <span class="primary">{{i.title}}</span>
                             </h2>
-                            <h4 class="caption subtitle">Select Item</h4>
+                            <h4 class="caption subtitle">{{i.Description}}</h4>
+                            <a class="caption button-radius" href="{% url 'Details1' i.title %}"><span class="icon"></span>Shop now</a>
                         </div>
+
                     </li>
-                    <li><img src="{% static 'Shopping/img/h4-slide4.png' %}" alt="Slide">
-                        <div class="caption-group">
-                            <h2 class="caption title">
-                                Apple <span class="primary">Store <strong>Ipod</strong></span>
-                            </h2>
-                            <h4 class="caption subtitle">& Phone</h4>
-                        </div>
-                    </li>
+                    {% endfor %}
+                    {% endif %}
                 </ul>
 			</div>
 			<!-- ./Slider -->
@@ -153,7 +147,7 @@
                 </div>
                 {% endfor %}
                 <div style="text-align:center;">
-                    <button class="btn btn-primary" style="margin-top:2px;"><a style="color:white;" href="{% url 'shop' %}">Click To check all Products</a></button>
+                    <a style="color:white;" href="{% url 'shop' %}"><button class="btn btn-primary" style="margin-top:2px;">Click To check all Products</button></a>
                 </div>
             </div>
         </div>

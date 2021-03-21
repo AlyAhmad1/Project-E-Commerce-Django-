@@ -24,5 +24,6 @@ urlpatterns = [
     path('foryou', V3.all_items, name='foryou'),
     path('recommendedadmin/<name>', V3.R_A, name='recommendedadmin'),
     path('del_recommendedadmin/<name>', V3.del_R_A, name='del_recommendedadmin'),
-
+    path('Carousel/<name>', V3.crousal, name='Carousel'),
+    path('del_Carousel/<name>', V3.del_crousal, name='del_Carousel'),
 ]

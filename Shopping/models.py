@@ -7,13 +7,14 @@ class Logs(models.Model):
 
 
 class Item(models.Model):
-    title = models.CharField(primary_key=True, max_length=50)
-    Description = models.CharField(max_length=200)
+    title = models.TextField(primary_key=True, max_length=50)
+    Description = models.TextField(max_length=200)
     Price = models.FloatField()
     Time = models.DateTimeField(null=True)
     Picture = models.ImageField(upload_to='Shopping/static', default='')
     Quantity = models.IntegerField(null=True)
     Recommended = models.BooleanField(default=False)
+    Crousal = models.BooleanField(default=False)
 
 
 class RecommendedAdmin(models.Model):
@@ -63,7 +64,7 @@ class Cart(models.Model):
 
 
 class Stock(models.Model):
-    title = models.CharField(max_length=50, primary_key=True)
+    title = models.TextField(max_length=50, primary_key=True)
     Buy_rate = models.FloatField()
     Sell_rate = models.FloatField()
     Quantity = models.IntegerField()
@@ -75,3 +76,10 @@ class Rating(models.Model):
     user = models.CharField(max_length=50)
     value = models.IntegerField()
     item = models.CharField(max_length=200)
+
+
+class Carousel(models.Model):
+    title = models.CharField(primary_key=True, max_length=50)
+    Description = models.CharField(max_length=200)
+    Price = models.FloatField()
+    Picture = models.ImageField(upload_to='Shopping/static', default='')

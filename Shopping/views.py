@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import FormA, FormB
-from .models import Logs, Item, Comment, Cart, Stock, Rating, RecommendedAdmin, RecommendedRating, RecommendedSearch, RecommendUser
+from .models import Logs, Item, Comment, Cart, Stock, Rating, RecommendedAdmin, RecommendedRating, RecommendedSearch, RecommendUser, Carousel
 from django.contrib import messages
 from datetime import datetime
 from . import login_required
@@ -65,7 +65,9 @@ class VIEWS:
             XX = [A,'Hot Offer']
 
         allProds = [XX,YY,Z]
-        data = {'form': form, 'se': se, 'All_items': all_items, 'User': user, 'filter':filter, 'allProds':allProds}
+        carousel_data = Carousel.objects.all()
+        check_carousel = len(carousel_data)
+        data = {'form': form, 'se': se, 'All_items': all_items, 'User': user, 'filter':filter, 'allProds':allProds, "carousel_data": carousel_data, "check_carousel": check_carousel}
         return render(request, 'Shopping/index1.html',data)
 
     def shop(self, request):
@@ -122,8 +124,16 @@ class VIEWS:
         return redirect('HOME')
 
     def del_item(self, request, pk):
-        Item.objects.filter(title=pk).delete()
-        Stock.objects.filter(title=pk).delete()
+        try:
+            Item.objects.filter(title=pk).delete()
+            Stock.objects.filter(title=pk).delete()
+            Carousel.objects.filter(title=pk).delete()
+            RecommendedAdmin.objects.filter(title=pk).delete()
+        except:
+            try:
+                RecommendedAdmin.objects.filter(title=pk).delete()
+            except:
+                pass
         return redirect('HOME')
 
     def details(self,request,pk):
@@ -310,12 +320,17 @@ class StockManage:
             # sell_rate = request.POST['Price']
             available = request.POST['Quantity']
             buy_rate = request.POST['buy']
+            DD = Item.objects.get(title=name)
+            DD.title = name
+            DD.Price = buy_rate
+            DD.Quantity = int(available)
+            DD.save()
+
             d = Stock.objects.get(title=name)
             d.title = name
             d.Buy_rate = buy_rate
             d.Available = available
-            # d.Sell = sell_rate
-            d.Quantity += int(available)
+            # d.Quantity += int(available)
             d.save()
             messages.error(request,f'Updated Field {name}')
         form = FormB()
@@ -353,6 +368,10 @@ class StockManage:
             RecommendedRating.objects.get(title=name).delete()
         except:
             pass
+        try:
+            Carousel.objects.get(title=name).delete()
+        except:
+            pass
         messages.error(request, f'Deleted Field {name}')
         return redirect('stock')
 
@@ -388,4 +407,23 @@ class ForYou:
         R.save()
         R_S = request.META.get('HTTP_REFERER')
         messages.error(request, f'{name} Removed from Recommended List')
+        return redirect(R_S)
+
+    def crousal(self, request, name):
+        all = Item.objects.get(title=name)
+        all.Crousal = True
+        all.save()
+        R = Carousel(title=all.title, Description=all.Description,Price=all.Price,Picture=all.Picture)
+        Carousel.save(R)
+        R_S = request.META.get('HTTP_REFERER')
+        messages.error(request, f'{name} Added in Carousel List')
+        return redirect(R_S)
+
+    def del_crousal(self, request, name):
+        Carousel.objects.filter(title=name).delete()
+        R = Item.objects.get(title=name)
+        R.Crousal = False
+        R.save()
+        R_S = request.META.get('HTTP_REFERER')
+        messages.error(request, f'{name} Removed from Carousel List')
         return redirect(R_S)
